@@ -1,41 +1,206 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>网站建设中...</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KDY</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      margin: 0;
-      height: 100vh;
-      background-color: #000;              /* 纯黑背景 */
-      color: #fff;                          /* 纯白文字 */
-      display: flex;
-      justify-content: center;              /* 水平居中 */
-      align-items: center;                  /* 垂直居中 */
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        font-family: "Segoe UI", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, sans-serif;
+        background: #000000;
+        color: #ffffff;
+        line-height: 1.7;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background-image: url("https://bing.img.run/uhd.php");
+        background-size: cover;
+        background-position: center;
+        /* 全局加重文字阴影 */
+        text-shadow: 0 6px 30px rgba(0, 0, 0, 0.95);
     }
-    .container {
-      text-align: center;
+    a { text-decoration: none; color: inherit; }
+
+    /* 浮动透明磨砂导航栏 */
+    header {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        height: 80px;
+        background: rgba(99, 99, 99, 0.53);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        z-index: 1000;
     }
-    h1 {
-      font-size: 60px;       /* 60px */
-      font-weight: bold;     /* 加粗 */
-      margin: 0;
-      letter-spacing: 4px;   /* 可选：稍微拉开字距更好看 */
+    nav {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 40px;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .logo {
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: 3px;
+        color: #ffffff;
+        text-shadow: 0 6px 30px rgba(0, 0, 0, 0.95);
+    }
+    .logo span { color: #ff2b2b; }
+    .nav-links a {
+        margin: 0 24px;
+        font-size: 17px;
+        font-weight: 500;
+        color: #ffffff;
+        position: relative;
+        transition: all 0.3s;
+        text-shadow: 0 6px 30px rgba(0, 0, 0, 0.95);
+    }
+    .nav-links a:hover {
+        color: #ff0000;
+    }
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -10px;
+        left: 50%;
+        background: #ff1010;
+        transition: all 0.4s;
+        transform: translateX(-50%);
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* 主视觉区 */
+    .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 20px;
+    }
+    .hero h1 {
+        font-size: 76px;
+        font-weight: 800;
+        letter-spacing: 6px;
+        color: #ffffff;
+        margin-bottom: 24px;
+        text-shadow: 0 8px 40px rgba(0, 0, 0, 0.98);
+    }
+    .hero p {
+        font-size: 24px;
+        color: #e0e0e0;
+        max-width: 860px;
+        margin-bottom: 50px;
+        text-shadow: 0 8px 40px rgba(0, 0, 0, 0.98);
+    }
+    .btn-primary {
+        padding: 16px 48px;
+        background: transparent;
+        border: 2px solid #ff0000;
+        color: #ff1111;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.4s;
+        text-shadow: 0 6px 30px rgba(0, 0, 0, 0.95);
+    }
+    .btn-primary:hover {
+        background: #ff0000;
+        color: #8888882b;
+        box-shadow: 0 0 40px rgba(255, 12, 12, 0.69);
+    }
+
+    /* 通用内容区 */
+    section {
+        padding: 140px 40px;
+        max-width: 1400px;
+        margin: 0 auto;
     }
     h2 {
-      font-size: 60px;       /* 60px */
-      font-weight: bold;     /* 加粗 */
-      margin: 0;
-      letter-spacing: 4px;   /* 可选：稍微拉开字距更好看 */
+        font-size: 56px;
+        font-weight: 700;
+        text-align: center;
+        color: #ffffff;
+        margin-bottom: 80px;
+        text-shadow: 0 8px 40px rgba(0,0,0,0.98);
     }
-  </style>
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
+    }
+    .card {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 20px;
+        padding: 44px 32px;
+        backdrop-filter: blur(10px);
+        transition: all 0.4s;
+    }
+    .card:hover {
+        transform: translateY(-16px);
+        background: rgba(255,255,255,0.08);
+        border-color: rgba(255, 0, 0, 0.3);
+    }
+    .card h3 {
+        font-size: 28px;
+        color: #ffffff;
+        margin-bottom: 20px;
+        text-shadow: 0 6px 30px rgba(0,0,0,0.95);
+    }
+    .card p {
+        font-size: 17px;
+        color: #cccccc;
+        text-shadow: 0 6px 30px rgba(0,0,0,0.95);
+    }
+
+    footer {
+        padding: 80px 20px 40px;
+        text-align: center;
+        color: #888888;
+        font-size: 15px;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        text-shadow: 0 6px 30px rgba(0,0,0,0.95);
+    }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>网站建设中...</h1>
-    <h2>Website under construction...</h2>
-  </div>
+
+<header>
+    <nav>
+        <div class="logo">#YD<span>K</span></div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">Abo</a>
+            <a href="#service">Serv</a>
+            <a href="#advantage">Adva</a>
+            <a href="#contact">Contac</a>
+        </div>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <h1>獉  鴩</h1>
+    <p>**** **** ****</p>
+    <a href="https://www.google.com/" class="btn-primary">Get   it!</a>
+</section>
+
+<section id="about">
+    <h2>About Us</h2>
+    <p style="text-align:center;font-size:22px;color:#e0e0e0;max-width:960px;margin:0 auto 60px;text-shadow: 0 8px 40px rgba(0,0,0,0.98);">
+        1099年に設立され、世界中で99³以上の業界のクライアントにサービスを提供しています
+    </p>
+</section>
+
+<footer>
+    • 強力なデータ暗号化、著作権の匿名性 •
+</footer>
+
 </body>
 </html>
