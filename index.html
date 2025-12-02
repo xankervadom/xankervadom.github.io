@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>KDY</title>
 <style>
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -16,7 +16,7 @@
         background-image: url("https://raw.githubusercontent.com/xankervadom/xankervadom.github.io/refs/heads/main/userindexbg.png");
         background-size: cover;
         background-position: center;
-        /* 全局加重文字阴影 */
+        background-attachment: fixed; /* 移动端固定背景更丝滑 */
         text-shadow: 0 6px 30px rgba(0, 0, 0, 0.95);
     }
     a { text-decoration: none; color: inherit; }
@@ -116,7 +116,6 @@
         box-shadow: 0 0 40px rgba(255, 12, 12, 0.69);
     }
 
-    /* 通用内容区 */
     section {
         padding: 140px 40px;
         max-width: 1400px;
@@ -167,6 +166,40 @@
         font-size: 15px;
         border-top: 1px solid rgba(255,255,255,0.08);
         text-shadow: 0 6px 30px rgba(0,0,0,0.95);
+    }
+
+    /* ==================== 移动端适配（新增） ==================== */
+    @media (max-width: 1024px) {
+        nav { padding: 0 24px; }
+        .nav-links a { margin: 0 16px; font-size: 16px; }
+    }
+
+    @media (max-width: 768px) {
+        header { height: 70px; }
+        .hero h1 { font-size: 56px; letter-spacing: 4px; }
+        .hero p { font-size: 20px; }
+        .btn-primary { padding: 14px 40px; font-size: 17px; }
+        section { padding: 100px 24px; }
+        h2 { font-size: 44px; }
+    }
+
+    @media (max-width: 480px) {
+        .logo { font-size: 26px; }
+        .hero h1 { font-size: 44px; }
+        .hero p { font-size: 18px; }
+        .btn-primary { padding: 12px 36px; }
+        section { padding: 80px 20px; }
+        h2 { font-size: 38px; margin-bottom: 60px; }
+        .card { padding: 36px 24px; }
+        footer { padding: 60px 20px 30px; font-size: 14px; }
+        
+        /* 手机上隐藏部分导航文字，只留图标感（或直接换成汉堡菜单也可） */
+        .nav-links a:nth-child(n+3) { display: none; } /* 保留 Home 和 Abo，其余隐藏 */
+    }
+
+    @media (max-width: 360px) {
+        .hero h1 { font-size: 40px; }
+        .logo { font-size: 24px; }
     }
 </style>
 </head>
